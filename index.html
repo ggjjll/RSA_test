@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>RSA加密算法</title>
+</head>
+<body>
+    <div id="key"></div>
+    <button id="getKey">生成秘钥</button><br />
+    <input type="text" value="nobook" id="passwork">
+    <button id="encryption">加密</button>
+    <div id="text"></div>
+    <button id="decrypted">解密</button>
+    <div id="pwd"></div>
+</body>
+<script src="js/logic.js"></script>
+<script>
+    let hasKey = false;
+    let text = '';
+    // 获取元素
+    function getEleById(id) {
+        return document.getElementById(id);
+    }
+
+    window.onload = () => {
+        // 生成秘钥
+        getEleById('getKey').onclick = () => {
+            getEleById('key').innerHTML = `公钥：${JSON.stringify(makeKey())}`;
+            hasKey = true;
+        }
+
+        // 加密
+        getEleById('encryption').onclick = () => {
+            if (hasKey) {
+                let password = getEleById('passwork').value;
+                text = getEleById('text').innerHTML = encryption(password);
+            }
+        }
+
+        // 解密
+        getEleById('decrypted').onclick = () => {
+            if (hasKey) {
+                getEleById('pwd').innerHTML = decrypted(text);
+            }
+        }
+    }
+</script>
+</html>
